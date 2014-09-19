@@ -122,3 +122,11 @@ Now we have a second graph for the free disk space. Note: You can use "rrdtool i
 
 Finally finishing with the standard HTML close tags.
 
+Seeing the results
+------------------
+
+After giving it some time to collect data, say a few hours, see the results by going to
+
+    http://192.168.0.14/cgi-bin/rrd.cgi 
+    
+(Replace 192.168.0.14 with the URL of your Arduino Yun on your local net)
