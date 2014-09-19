@@ -64,6 +64,16 @@ Each plugin may have some configuration but for now we'll only configure the out
     
 Here we are telling collectd to store the output to the first (FAT16/32) partition of the SD card.
 
+Start the collectd service
+--------------------------
+
+Before collectd will collect anything, you need to enable and start the collectd service
+
+    root@Arduino:/# /etc/init.d/collectd enable
+    root@Arduino:/# /etc/init.d/collectd start
+
+Enabling the service ensures that it will start on future boots
+
 Display some results
 --------------------
 
@@ -133,4 +143,5 @@ After giving it some time to collect data, say a few hours, see the results by g
 
     http://192.168.0.14/cgi-bin/rrd.cgi 
     
-(Replace 192.168.0.14 with the URL of your Arduino Yun on your local net)
+(Replace 192.168.0.14 with the URL of your Arduino Yun on your local net. Note: don't use /arduino, that is for the bridge REST service)
+
