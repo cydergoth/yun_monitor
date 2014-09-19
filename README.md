@@ -5,6 +5,10 @@ I wrote this little howto as a number of people are having issues with basic WWW
 
 The intention is to give a simple introduction to the setting up some nice monitoring tools on the device and exposing them on the WWW page.
 
+Example
+-------
+![Sample Image](https://github.com/cydergoth/yun_monitor/blob/master/example/Reptile%20House_files/memory.png)
+
 Parition Arduino Yún SD
 -----------------------
 
