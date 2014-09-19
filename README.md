@@ -65,7 +65,7 @@ Display some results
 
 Collectd doesn't have any output features, but there is a very simple tool "rrdcgi" which can output graphs from the rrd databases collectd creates.
 
-That tool uses a "cgi-bin" file (example in this GIT repo) which creates simple HTML pages with graphs in. 
+That tool uses a ["cgi-bin" file] (https://github.com/cydergoth/yun_monitor/blob/master/cgi-bin/rrd.cgi) which creates simple HTML pages with graphs in. 
 
 Drop the _.cgi_ file into the /www/cgi-bin directory on the Arduino Yun. You should make it executable with
 
