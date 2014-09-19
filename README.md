@@ -23,7 +23,7 @@ Log into your Yún via SSH and run the following commands:
 This will install the CollectD statistics engine and the RRD "Round Robin Database" engine used to store the collected data.
 
 Configure Collectd
-__________________
+------------------
 
 Now a small amount of configuration is needed.
 
@@ -67,10 +67,58 @@ Collectd doesn't have any output features, but there is a very simple tool "rrdc
 
 That tool uses a "cgi-bin" file (example in this GIT repo) which creates simple HTML pages with graphs in. 
 
-Drop the _.cgi_ file into the /www/cgi-bin directory on the Arduino Yun
+Drop the _.cgi_ file into the /www/cgi-bin directory on the Arduino Yun. You should make it executable with
 
+    root@Arduino:/www/cgi-bin#  chmod +x rrd.cgi
 
+Lets take a closer look at this file:
 
+    #!/usr/bin/rrdcgi
+    
+This line tells the WWW browser to use the rrdcgi tool to interpret this file
 
+    <HTML>
+    <HEAD><TITLE>Reptile House</TITLE></HEAD>
+    <BODY>
+    <H1>Reptile House</H1>
+    <P>
+    
+These lines are the standard HTML webpage introduction for a basic WWW page (no DTD, no CSS). ("Reptile House" is where this Yun will be controlling the temperatures)
 
+    <RRD::GRAPH
+       --imginfo '<IMG SRC=/sd/%s WIDTH=%lu HEIGHT=%lu >'
+       
+This line introduces a graph for RRD which will be accessed by the /sd/ url base path and have the smae name as in the next line
+
+       /www/sd/memory.png --lazy --title="Memory" 
+       
+This line defines the file system location of the image file for the graph and the title. The "--lazy" option instructs rrcgi not to redraw the graph unless it needs to
+
+       DEF:free=/mnt/sda1/data/collectd/rrd/Arduino/memory/memory-free.rrd:value:AVERAGE 
+       DEF:used=/mnt/sda1/data/collectd/rrd/Arduino/memory/memory-used.rrd:value:AVERAGE 
+
+Now we define two data streams for the graph
+
+       LINE2:free#00a000:"Free"
+       LINE2:used#0000a0:"Used"
+       >
+    
+Finally we tell rrdcgi to draw two lines on the graph with the specified colors and legends. The "rrdcgi" tool supports a few more options, see the documentation on it for more details (http://manpages.ubuntu.com/manpages/hardy/man1/rrdcgi.1.html)
+
+Note that we are using the rrdcgi1 module as we don't need any more sophisticated features
+
+    <RRD::GRAPH
+      --imginfo '<IMG SRC=/sd/%s WIDTH=%lu HEIGHT=%lu>'
+      /www/sd/df.png --lazy --title="Disk Free"
+      DEF:sda1=/mnt/sda1/data/collectd/rrd/Arduino/df/df-mnt-sda1.rrd:free:AVERAGE
+      LINE2:sda1#00a000:"sda1"
+      >
+      
+Now we have a second graph for the free disk space. Note: You can use "rrdtool info <file>" to see what the data streams inside the ".rrd" files are called. In the first graph there are two streams in different files both called "value", wheras the second graph refers to a steam called "free" - one of several in the same file. 
+
+    </P>
+    </BODY>
+    </HTML>
+
+Finally finishing with the standard HTML close tags.
 
