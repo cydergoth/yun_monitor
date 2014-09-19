@@ -1,9 +1,9 @@
-HOWTO: Simple Monitoring on Arduino Yún 
+﻿HOWTO: Simple Monitoring on Arduino Yún 
 =======================================
 
 I wrote this little howto as a number of people are having issues with basic WWW functionality on the Arduino Yún
 
-The intention is to give a simple introduction to the setting up some nice monitoring tools on the device and exposing them on the WWW page.
+The intention is to give a simple introduction to the setting up of some nice monitoring tools on the device and exposing them on the WWW page.
 
 Example
 -------
@@ -102,7 +102,7 @@ These lines are the standard HTML webpage introduction for a basic WWW page (no 
     <RRD::GRAPH
        --imginfo '<IMG SRC=/sd/%s WIDTH=%lu HEIGHT=%lu >'
        
-This line introduces a graph for RRD which will be accessed by the /sd/ url base path and have the smae name as in the next line
+This line introduces a graph for RRD which will be accessed by the /sd/ url base path and have the same name as in the next line
 
        /www/sd/memory.png --lazy --title="Memory" 
        
@@ -128,7 +128,7 @@ Note that we are using the rrdcgi1 module as we don't need any more sophisticate
       LINE2:sda1#00a000:"sda1"
       >
       
-Now we have a second graph for the free disk space. Note: You can use "rrdtool info <file>" to see what the data streams inside the ".rrd" files are called. In the first graph there are two streams in different files both called "value", wheras the second graph refers to a steam called "free" - one of several in the same file. 
+Now we have a second graph for the free disk space. Note: You can use "rrdtool info <file>" to see what the data streams inside the ".rrd" files are called. In the first graph there are two streams in different files both called "value", wheras the second graph refers to a stream called "free" - one of several in the same file. 
 
     </P>
     </BODY>
