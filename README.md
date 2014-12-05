@@ -54,7 +54,7 @@ This section contains the three plugins we shall be enabling : df, memory and rr
 
 ### Output Configuration
 
-Each plugin may have some configuration but for now we'll only configure the output plugin and use defaults for the others
+Each plugin may have some configuration but for now we'll only configure the output plugin and use defaults for the others. Note that the hostname of the Arudino (by default "Arduino") appears in the full RRD file names under this filepath!
 
     <Plugin rrdtool>
            DataDir "/mnt/sda1/data/collectd/rrd"
@@ -106,7 +106,7 @@ This line introduces a graph for RRD which will be accessed by the /sd/ url base
 
        /www/sd/memory.png --lazy --title="Memory" 
        
-This line defines the file system location of the image file for the graph and the title. The "--lazy" option instructs rrcgi not to redraw the graph unless it needs to
+This line defines the file system location of the image file for the graph and the title. The "--lazy" option instructs rrcgi not to redraw the graph unless it needs to. 
 
        DEF:free=/mnt/sda1/data/collectd/rrd/Arduino/memory/memory-free.rrd:value:AVERAGE 
        DEF:used=/mnt/sda1/data/collectd/rrd/Arduino/memory/memory-used.rrd:value:AVERAGE 
