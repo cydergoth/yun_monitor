@@ -1,7 +1,7 @@
-ï»¿HOWTO: Simple Monitoring on Arduino YÃºn 
+HOWTO: Simple Monitoring on Arduino Yún 
 =======================================
 
-I wrote this little howto as a number of people are having issues with basic WWW functionality on the Arduino YÃºn
+I wrote this little howto as a number of people are having issues with basic WWW functionality on the Arduino Yún
 
 The intention is to give a simple introduction to the setting up of some nice monitoring tools on the device and exposing them on the WWW page.
 
@@ -9,17 +9,17 @@ Example
 -------
 ![Sample Image](https://github.com/cydergoth/yun_monitor/blob/master/example/Reptile%20House_files/memory.png)
 
-Parition Arduino YÃºn SD
+Parition Arduino Yún SD
 -----------------------
 
-The Arduino YÃºn usually is paired with an SD card to expand the on-board storage space. This card is best setup with the partioning sketch from http://arduino.cc/en/Tutorial/ExpandingYunDiskSpace
+The Arduino Yún usually is paired with an SD card to expand the on-board storage space. This card is best setup with the partioning sketch from http://arduino.cc/en/Tutorial/ExpandingYunDiskSpace
 
 Note that the Arduino should be connected to the host computer running the IDE via USB, and also configured to connect to the Internet via Wifi or Ethernet cable. After that just follow the instructions in the above tutorial to partition your SD card.
 
 Install required software
 -------------------------
 
-Log into your YÃºn via SSH and run the following commands:
+Log into your Yún via SSH and run the following commands:
 
     root@Arduino:~# opkg update
     root@Arduino:~# opkg install collectd collectd-mod-df collectd-mod-exec collectd-mod-memory collectd-mod-rrdtool rrdcgi1 rrdtool1
@@ -145,3 +145,15 @@ After giving it some time to collect data, say a few hours, see the results by g
     
 (Replace 192.168.0.14 with the URL of your Arduino Yun on your local net. Note: don't use /arduino, that is for the bridge REST service)
 
+Exec example
+------------
+In the exec-example directory are two files and a config file used to demonstrate the use of the "Exec" plugin. Note that this example also uses a custom "types.db" file which is loaded in addition to the default one. It defines a new type "temp".
+
+This example uses "curl" to invoke the REST api to the arduino. The sketch returns data in the format of 
+
+<sensor id>,<c temp>,<f temp>
+
+Where 
+sensor id = 64bit ID of the DS18B20 sensor
+c temp = current temperature in Celcius
+f temp = current temperature in Farenheit
